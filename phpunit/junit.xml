@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="IndexControllerTest" file="C:\wamp\www\GestionFormationZF1\tests\application\controllers\IndexControllerTest.php" category="test" tests="10" assertions="48" failures="1" errors="0" time="3.828443">
+    <testcase name="testIndexAction" class="IndexControllerTest" file="C:\wamp\www\GestionFormationZF1\tests\application\controllers\IndexControllerTest.php" line="29" assertions="2" time="0.734436"/>
+    <testcase name="testSessionAdmin" class="IndexControllerTest" file="C:\wamp\www\GestionFormationZF1\tests\application\controllers\IndexControllerTest.php" line="41" assertions="5" time="0.156263"/>
+    <testcase name="testSessionUser" class="IndexControllerTest" file="C:\wamp\www\GestionFormationZF1\tests\application\controllers\IndexControllerTest.php" line="67" assertions="5" time="0.171889"/>
+    <testcase name="testIndexActionShouldContainLoginForm" class="IndexControllerTest" file="C:\wamp\www\GestionFormationZF1\tests\application\controllers\IndexControllerTest.php" line="93" assertions="2" time="0.406284"/>
+    <testcase name="testValidLoginShouldGoToProfileAdminPage" class="IndexControllerTest" file="C:\wamp\www\GestionFormationZF1\tests\application\controllers\IndexControllerTest.php" line="105" assertions="8" time="0.890699">
+      <failure type="Zend_Test_PHPUnit_Constraint_Exception">IndexControllerTest::testValidLoginShouldGoToProfileAdminPage
+Failed asserting node denoted by span CONTAINS content "WAsrfdszdxI"
+
+C:\wamp\www\GestionFormationZF1\library\Zend\Test\PHPUnit\Constraint\DomQuery37.php:275
+C:\wamp\www\GestionFormationZF1\library\Zend\Test\PHPUnit\ControllerTestCase.php:337
+C:\wamp\www\GestionFormationZF1\tests\application\controllers\IndexControllerTest.php:127
+</failure>
+    </testcase>
+    <testcase name="testValidLoginShouldGoToProfileUserPage" class="IndexControllerTest" file="C:\wamp\www\GestionFormationZF1\tests\application\controllers\IndexControllerTest.php" line="135" assertions="6" time="0.562547"/>
+    <testcase name="testNotValidLogin" class="IndexControllerTest" file="C:\wamp\www\GestionFormationZF1\tests\application\controllers\IndexControllerTest.php" line="167" assertions="4" time="0.531294"/>
+    <testcase name="testLogOut" class="IndexControllerTest" file="C:\wamp\www\GestionFormationZF1\tests\application\controllers\IndexControllerTest.php" line="188" assertions="6" time="0.125011"/>
+    <testcase name="testNotFoundHomeAdmin" class="IndexControllerTest" file="C:\wamp\www\GestionFormationZF1\tests\application\controllers\IndexControllerTest.php" line="208" assertions="5" time="0.125010"/>
+    <testcase name="testNotFoundDetailsAdmin" class="IndexControllerTest" file="C:\wamp\www\GestionFormationZF1\tests\application\controllers\IndexControllerTest.php" line="232" assertions="5" time="0.125010"/>
+  </testsuite>
+</testsuites>

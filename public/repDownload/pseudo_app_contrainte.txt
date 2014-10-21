@@ -1,0 +1,48 @@
+Application Contrainte
+
+Utilisateur
+- Saisir nom de la contrainte et la limite
+- si limite > 3 mois
+		validation
+- si clique sur bouton 'Soumettre'
+	mail envoyé au CP et en copie l'utilisateur
+	MAJ du champ 'Applied' dans la BDD
+	Afficher 'Votre demande est soumise pour validaion' sur l'ecran de l'utilisateur
+- si clique sur bouton 'Annuler'
+	- afficher un ecran de confirmation
+	- Si oui
+		mail envoyé au CP et cc l'utilisateur
+		MAJ du champ 'cancelled' dans la BDD
+	- si non
+		a ne rien faire
+
+CP
+- Afficher les contraintes soumises + rejetees
+- Si clique sur une contrainte
+	la contrainte de l'utilisateur s'ouvre
+	
+	Si la contrainte est rejetee 
+		mail envoyé a l'utilisateur et cc CP
+		MAJ du champ 'rejected' dans la BDD
+		MAJ du message sur l'ecran de l'utilisateur
+		
+	Si la contrainte est validee
+		mail envoyé a la direction cc l'utilisateur et CP
+		MAJ du champ 'validated by CP' dans la BDD
+		MAJ du message sur l'ecran de l'utilisateur
+		
+		
+Direction
+- Afficher les contraintes validees par le CP seulement
+
+- Si la contrainte est rejetee 
+		mail envoyé a utilisateur et cc CP, Direction
+		MAJ du champ 'rejected' dans la BDD
+		MAJ du message sur l'ecran de l'utilisateur
+		
+	Si la contrainte est validee
+		mail envoyé a l'utilisateur cc CP, Direction
+		MAJ du champ 'validated by Direction' dans la BDD
+		MAJ du message sur l'ecran de l'utilisateur
+		MAJ de la base centralisée.
+

@@ -1,0 +1,74 @@
+<div class="title-head">
+    <strong> Formation : </strong><?php echo $this->details['for_name']; ?> <strong>Durée de test : </strong><?php echo $this->details['tst_duration']; ?> minute
+</div>
+<div class="file_ariane">
+    <ul>
+        <li>
+            <a href="/user">Accueil</a>
+        </li>  
+        <li>
+            <img src="<?php echo $this->baseUrl('/images/rightArrow.png'); ?>">
+        </li>
+        <li>
+            <a href="<?php
+            echo $this->url(array('controller' => 'user',
+                'action' => 'tests'));
+            ?>">Passer le test</a>
+        </li> 
+        <li>
+            <img src="<?php echo $this->baseUrl('/images/rightArrow.png'); ?>">
+        </li>
+        <li> <?php echo $this->details['tst_title']; ?></li>
+    </ul>
+</div>
+
+<?php
+$questions = $this->questions;
+if (!empty($questions)) {
+    ?>
+    <div class="starting_test">
+        <h2>Cocher les cases qui correspondent à des réponses exactes </h2>
+        <form method="post" action="/user/end/id/<?php echo Zend_Controller_Front::getInstance()->getRequest()->getParam('id'); ?>" enctype="application/x-www-form-urlencoded">
+
+            <ul>
+                <?php
+                    $i = 1;
+                    foreach ($questions as $key => $element) {
+                        ?>
+                        <li class="element-group">
+                            <label class="optional_qcm" for="ds">
+
+                                <?php echo $i . '- ' . $element['qst_title']; ?> ?
+                            </label>
+                            <?php
+                            foreach ($choices = $element['reponse'] as $key_ch => $element_ch) {
+                                foreach ($element_ch as $key_ch1 => $element_ch1) {
+                                    ?> <label>
+                                        <input id="ds-choice_title" class="qst" type="radio" value="<?php echo $element_ch1; ?>" name="<?php echo $element['qst_id']; ?>"></input>
+                                        <?php echo $element_ch1; ?>
+                                    </label>
+                                    <?php
+                                }
+                            }$i++;
+                            ?>
+
+                        </li>
+                        <?php
+                    }
+                    ?>
+                    <div class="submit-group">
+                        <input id="boutonenvoyer" class="btn btn-primary" type="submit" value="soumettre le test" name="soumettre"></input>
+                    </div>
+                </ul>
+
+            </form>
+
+        </div>
+            <?php
+    }
+    else{
+    ?>
+<p class="p-warning">Aucun test ajouté pour cette formation</p>
+       <?php
+    }
+    ?>

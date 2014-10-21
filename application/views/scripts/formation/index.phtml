@@ -1,0 +1,142 @@
+<?php
+$this->title = "Liste des Formations";
+$this->headTitle($this->title);
+?>
+<BR><BR>
+<div class="horControlB" >
+    <ul>
+        <li>
+            <a href="<?php echo $this->url(array('controller' => 'formation', 'action' => 'add')); ?>">
+                <img   src="<?php echo $this->baseUrl(); ?>/images/icons/color/application-plus.png" />
+                <span>Ajouter une nouvelle formation</span>
+            </a>
+        </li>
+        <li>
+            <a href="<?php echo $this->url(array('controller' => 'formation', 'action' => 'test')); ?>">
+                <img   src="<?php echo $this->baseUrl(); ?>/images/icons/color/document-task.png" />
+                <span>Ajouter un Test</span>
+            </a>
+        </li>
+    </ul>
+</div>
+
+<div class="widget">
+    <div class="title"><img src="<?php echo $this->baseUrl(); ?>/images/icons/dark/list.png" alt="" class="titleIcon" /><h6>Liste des formations</h6></div>    
+    <table cellpadding="0" cellspacing="0" border="0" class="display dTable">
+        <thead>
+            <tr>
+                <th>Titre</th> 
+                <th>Description</th>
+                <th>Dur&eacute;e</th>
+                <th>Contenu</th>
+                <th>Techno</th>
+                <th>Test</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php $i = 0;
+            foreach ($this->formations as $forma) : ?>
+                <tr <?php if ($i % 2 === 0) {
+                    echo 'class="gradeA"';
+                } ?>>
+                    <td><?php echo $this->escape($forma['for_name']); ?></td> 
+                    <td><?php echo $this->escape($forma['for_description']); ?></td>
+                    <td style="text-align:center;"><?php echo $this->escape($forma['for_duration']); ?></td>
+                    <td style="text-align:center;">
+						<a title="Télécharger <?php echo $forma['for_filepath']; ?>" class="tipS" href="<?php echo $this->url(array('controller' => 'formation', 'action' => 'download', 'id' => $forma['for_id'])); ?>" title="" > 
+                        	<img  src="<?php echo $this->baseUrl(); ?>/images/icons/control/16/upcoming-work.png" />
+                        </a>
+                    </td>
+                    <td style="text-align:center;"><?php echo $this->escape($forma['grp_name']); ?></td>
+                    <td style="text-align:center;">
+                            <?php if(!empty($forma['tst_title'])){ ?>
+                               <!--  <li>
+                                    <a title="Modifier le test" class="tipS" href="<?php echo $this->url(array('controller' => 'formation', 'action' => 'edit', 'id' => $forma['for_id'])); ?>" title="" > 
+                                        <img  src="<?php echo $this->baseUrl(); ?>/images/icons/color/wand.png" />
+                                    </a>
+                                </li>-->
+                                <a href ="#" title="Supprimer test" class="tipS" onclick="deleteTest(<?php echo $forma['tst_id'] ?>)">
+                                    <img   src="<?php echo $this->baseUrl(); ?>/images/icons/color/cross.png" />
+                                </a>
+
+                            <?php }else{ ?>  
+                                <a title="Ajouter test" class="tipS" href ="<?php echo $this->url(array('controller' => 'formation', 'action' => 'test')); ?>" ">
+                                    <img title=""  src="<?php echo $this->baseUrl(); ?>/images/icons/color/plus.png" />
+                                </a>
+                            <?php } ?>  
+                            </ul>
+                        </div>
+                    </td>
+                    <td style="text-align:center;width:100px">
+   						 <span style='margin-right: 15px'>
+                               <a title="Modifier la formation"  class="tipS" href="<?php echo $this->url(array('controller' => 'formation', 'action' => 'edit', 'id' => $forma['for_id'])); ?>" title="" > 
+                                   <img  src="<?php echo $this->baseUrl(); ?>/images/icons/control/16/pencil.png" />
+                               </a>
+						</span>
+                               <span>
+                                  <a title="Supprimer la formation"  class="tipS" href ="#" onclick="supprimer(<?php echo $forma['for_id'] ?>)">
+                                      <img   src="<?php echo $this->baseUrl(); ?>/images/icons/control/16/del.png" />
+                                  </a>
+                               </span>
+                    </td>
+                </tr>
+<?php endforeach; ?>
+        </tbody>
+    </table>
+</div>
+<script>
+    function supprimer(id) {
+        if (confirm("Voulez-vous supprimer cette enregistrement ?")) { // Clic sur OK
+             /*$.ajax({
+                type: "GET",
+                url :"/formation/delete/id/"+id,
+                success:function(msg){
+                         //window.location.reload();
+                        }
+            });*/
+            $.post('/formation/delete/id/'+id,function(msg){
+                switch(msg){                    
+                    case('KO'):
+                        alert('Cette formation ne peut être supprimée. Il y a des personnes assignées à cette formation.');
+                    break;
+                    case('TEST'):
+                         alert('Il y a des tests associés à cette formation. Il faut supprimer les tests avant de supprimer la formation.');
+                    break;
+                    case('OK'):
+                        window.location.reload();
+                    break;
+                };
+            });
+        }
+    }
+    function deleteTest(id) {
+        if (confirm("Voulez-vous supprimer ce test ?")) { // Clic sur OK
+            $.ajax({
+                type: "GET",
+                url: "/formation/deletetest/id/" + id,
+                success: function(msg) {
+                    //window.location.reload();
+                }
+            });
+        }
+    }
+</script>
+
+<!--<div id ='popDelete' class="widget" style='display: none;'>
+    <div class="title">
+        <img class="titleIcon" alt="" src="<?php echo $this->baseUrl(); ?>/images/icons/dark/trash.png">
+        <h6>Supprimer une formation</h6>
+    </div>  
+    <p>&Ecirc;tes-vous s&ucirc;r de vouloir supprimer la formation
+        '<?php echo $this->escape($this->formation['for_name']); ?>' du groupe
+        '<?php echo $this->escape($this->formation['grp_name']); ?>'?
+    </p>
+    <div style="margin-left:20px;">
+    <form action="<?php echo $this->url(array('action' => 'delete')); ?>" method="post">
+            <input type="hidden" name="id" value="<?php echo $this->formation['for_id']; ?>" />
+            <input type="submit" name="del" value="Oui" />&nbsp;
+            <input type="submit" name="del" value="Non" />
+    </form>
+    </div><br/>
+</div>-->

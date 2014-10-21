@@ -1,0 +1,26 @@
+{
+	"require": {
+		"behat/behat": "2.4.*@stable",
+		"behat/mink": "1.5@stable",
+		"behat/mink-goutte-driver": "*",
+		"behat/mink-selenium2-driver": "*",
+		"behat/mink-extension": "*",
+        "halleck45/behat-wizard-bundle": "dev-master",
+		"squizlabs/php_codesniffer": "1.*",
+		"phploc/phploc": "*",
+		"pdepend/pdepend" : "1.1.1",
+		"sebastian/phpcpd": "*",
+		"theseer/phpdox": "@stable",
+		"phpmd/phpmd" : "@stable",
+		"phpunit/phpunit": "3.7.*",
+		"phpunit/dbunit": ">=1.2",
+		"phpunit/phpunit-selenium": ">=1.2",
+		"phpunit/phpunit-skeleton-generator": "*"
+    
+	},
+	"minimum-stability": "dev",
+	"config": {
+		"bin-dir": "bin/"
+	}
+
+}

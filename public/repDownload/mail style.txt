@@ -1,0 +1,138 @@
+<style>
+
+              .tabled{ border-collapse:collapse; }
+
+              .tabled td.annualLeaveHeader{ font-weight:800;color:#fff;background-color:#74afd1; }
+
+              .tabled td.sickLeaveHeader{ font-weight:800;color:#fff;background-color:#c26464; }
+
+              .tabled td.compensationHeader{ font-weight:800;color:#fff;background-color:#9d8110; }
+
+              .tabled td.paternityLeavesHeader{ font-weight:800;color:#fff;background-color:#9d8110; }
+
+              .tabled td.examLeaveHeader{ font-weight:800;color:#fff;background-color:#9d8110; }
+
+              .tabled td.specialpermissionHeader{ font-weight:800;color:#fff;background-color:#9d8110; }
+
+              .tabled td.maternityLeaveHeader{ font-weight:800;color:#fff;background-color:#9d8110; }
+
+              .tabled td.annualLeave{ background-color:#87cefa; }
+
+              .tabled td.sickLeave{ background-color:#ff8080; }
+
+              .tabled td.compensation{ background-color:#e8bf19; }
+
+              .tabled td.paternityLeaves{ background-color:#e8bf19; }
+
+              .tabled td.examLeave{ background-color:#e8bf19; }
+
+              .tabled td.specialpermission{ background-color:#e8bf19; }
+
+              .tabled td.maternityLeave{ background-color:#e8bf19; }
+
+              .tabled td{ padding:7px;border-bottom:1px solid #efefef; }
+
+              .tabled th{ border-bottom:1px solid #ffffff; }
+
+              body{ font-family: Corbel, 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', 'DejaVu Sans', 'Bitstream Vera Sans', 'Liberation Sans', Verdana, 'Verdana Ref', sans-serif;font-size:13px; }
+
+              .noSpace{ padding:0;margin:0; }
+
+              .linky{ text-decoration:none;font-weight:400;color:#000000; }
+
+              .linky:hover{ background-color:#000000; }
+
+             </style>
+
+ 
+
+Pou to mailer la nou getter sipa to pou fer ene classe ou just a function.
+
+
+
+
+
+        $text = '';
+        $text .= '<html><head><style>';
+        $text .= '
+        body{ 
+            font-family: Corbel, "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", "DejaVu Sans", "Bitstream Vera Sans", "Liberation Sans", Verdana, "Verdana Ref", sans-serif;
+            font-size:13px; 
+            }
+        
+        .tabled{ 
+            border-collapse:collapse;
+        }
+
+        .tabled td.contrainteHeader{
+            font-weight:800;
+            color:#fff;
+            background-color:#F0A843;
+            border-bottom:1px solid #ffffff;    
+        }
+
+        .tabled td.contrainte{
+            background-color:#FAD6A5;   
+        }
+
+        .tabled td{ 
+            padding:7px;
+            border-bottom:1px solid #efefef; 
+        }';        
+        $text .= '</style></head><body>';
+        $text = 'Bonjour,'; 
+        if ($task == "add")
+        {
+            $text .= '<p style="color:red;">Veuillez noter que j\'ai fait une demande de contrainte sur AMIS.</p>';
+        }
+        else if ($task == "cancel")
+        {           
+            $text .= '<p>Veuillez noter que j\'ai annulé ma demande de contrainte ci-dessous.</p>';                  
+        }
+
+        $text .= '<p><table class="tabled" cellpadding="2">
+                        <tr><td class="contrainteHeader">Contrainte</td><td class="contrainte">'.$desc.'</td></tr>
+                        <tr><td class="contrainteHeader">De</td><td class="contrainte">'.$from.'</td></tr>
+                        <tr><td class="contrainteHeader">A</td><td class="contrainte">'.$to.'</td></tr> 
+                        </table></p>';
+        $text .= '<p>Cordialement,<br/>'.$sendername.'</p>';
+            
+        $text .= '<p><i>(Ceci est un email généré automatiquement par l\'outil contrainte d\'AMIS)</i></p>';
+        $text .= '</body></html>';
+
+    return $text; 
+
+
+
+
+
+        $text = '';
+        $text .= '<html>';
+        $text .= '<body style="font-family: Corbel, "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", "DejaVu Sans", "Bitstream Vera Sans", "Liberation Sans", Verdana, "Verdana Ref", sans-serif;font-size:13px;">';
+        
+        $text .= 'Bonjour,'; 
+        
+        if ($task == "add")
+        {
+            $text .= '<p>Veuillez noter que j\'ai fait une demande de contrainte sur AMIS.</p>';
+        }
+        else if ($task == "cancel")
+        {           
+            $text .= '<p>Veuillez noter que j\'ai annulé ma demande de contrainte ci-dessous.</p>';                  
+        }
+
+        $text .= '<p><table style="border-collapse:collapse;width:55%;text-align:center;" cellpadding="2">
+                        <tr><td colspan="2" style="background-color:#FF9933;color:#ffffff;border-bottom:1px solid #ffffff;">Contrainte</td></tr>
+                        <tr><td style="font-weight:800;color:#fff;background-color:#000000;border-bottom:1px solid #ffffff;">Contrainte</td>
+                            <td style="background-color:#FFCC66;border-bottom:1px solid #ffffff;">'.$desc.'</td></tr>
+                        <tr><td style="font-weight:800;color:#fff;background-color:#FFCC66;border-bottom:1px solid #ffffff;">De</td>
+                            <td style="background-color:#FFCC66;border-bottom:1px solid #ffffff;">'.$from.'</td></tr>
+                        <tr><td style="font-weight:800;color:#fff;background-color:#FFCC66;border-bottom:1px solid #ffffff;">A</td>
+                            <td style="background-color:#FFCC66;border-bottom:1px solid #ffffff;">'.$to.'</td></tr> 
+                        </table></p>';
+        $text .= '<p>Cordialement,<br/>'.$sendername.'</p>';
+            
+        $text .= '<p><i>(Ceci est un email généré automatiquement par l\'outil contrainte d\'AMIS)</i></p>';
+        $text .= '</body></html>';
+
+    return $text; 

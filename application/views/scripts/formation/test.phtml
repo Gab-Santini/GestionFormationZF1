@@ -1,0 +1,162 @@
+<!-- Notifications -->
+        <?php if(empty($this->data_formation)): ?>
+            <div class="nNote nWarning hideit">
+                <p><strong>WARNING: </strong>Attention, Vous n'avez pas une formation disponible ! vous devez ajouter une nouvelle formation ou supprimez le test existant.</p>
+            </div>
+        <?php endif; ?>
+        <?php if($this->succes == 'ok'): ?>
+        <div class="nNote nSuccess hideit">
+            <p><strong>SUCCESS: </strong>Le test a bien été enregistré :) !</p>
+        </div> 
+        <?php endif; ?>
+        <div style='display:none' class="nNote nFailure hideit">
+            <p><strong>FAILURE: </strong>Oops sorry. Le test n'a pas été enregistré :( !</p>
+        </div>
+
+<form id="validate" action="<?php echo $this->url(array('action'=>'test')); ?>" method="post" class="form">
+    <fieldset>
+        <div class="widget">
+            <div class="title"><img src="<?php echo $this->baseUrl();?>/images/icons/dark/list.png" alt="" class="titleIcon" /><h6>Ajouter Test</h6></div>
+            <div class="formRow">
+               <label>Formation:<span class="req">*</span></label>
+                <div class="formRight">
+                    <div class="floatL">
+                        <select  name='formation' id='formation' class="validate[required]"  tabindex="2"  >
+                            <option value="">Sélectionner une formation</option> 
+                            <?php foreach($this->data_formation as $formation){ ?>
+                            <option value="<?php echo $formation['for_id']; ?>"><?php echo $formation['for_name']; ?></option> 
+                            <?php } ?>
+                        </select>
+                    </div>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="formRow">
+                <label>Ajouter titre de test:<span class="req">*</span></label>
+                <div class="formRight">
+                    <span class="oneTwo"><input name='title' class="validate[required]" id='title' type="text" value="" /></span>
+                </div>
+                <div class="clear"></div>
+            </div>  
+            <div class="formRow">
+                <label>Durée de test:<span class="req">*</span></label>
+                <div class="formRight">
+                    <span class="oneTwo"><input class="validate[required,custom[onlyNumberSp]]" name='duration' id='duration' type="text" value="" /></span>
+                </div>
+                <div class="clear"></div>
+            </div>
+         </div>
+         <div class="widget">
+              <div class="title"><img src="<?php echo $this->baseUrl();?>/images/icons/dark/create.png" alt="" class="titleIcon" /><h6>Ajouter Question N 1</h6></div>
+            <div class="formRow dnone">
+                <label>Question 1:<span class="req">*</span></label>
+                <div class="formRight"><textarea class="validate[required]" id="editor_1" name="editor_1" rows="" cols=""></textarea></div> 
+                <div class="clear"></div>
+            </div>
+            
+            <div class="formRow dnone">
+                <label>Choix 1:<span class="req">*</span><BR><BR><BR>Choix 2:<span class="req">*</span><BR><BR><BR>Choix 3:<span class="req">*</span><BR><BR><BR>Choix 4:<span class="req">*</span></label>
+                <div class="formRight mt12">
+                    <span class="oneOne"><input onchange ='getGoodAnwerOption(1);' class="validate[required]" name='choice1_1' id='choice1_1' type="text" value="" /></span><BR><BR>
+                    <span class="oneOne"><input onchange ='getGoodAnwerOption(1);' class="validate[required]" name='choice2_1' id='choice2_1' type="text" value="" /></span><BR><BR>
+                    <span class="oneOne"><input onchange ='getGoodAnwerOption(1);' class="validate[required]" name='choice3_1' id='choice3_1' type="text" value="" /></span><BR><BR>
+                    <span class="oneOne"><input onchange ='getGoodAnwerOption(1);' class="validate[required]" name='choice4_1' id='choice4_1' type="text" value="" /></span>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="formRow">
+                <label>La bonne réponse :</label>
+                <div id="good-answer_1"></div>
+                <input type="hidden" name="Hide[1]" />
+                <div class="clear"></div>
+            </div>
+        </div>
+        
+        <div class="question"></div>
+        
+        <div class="line mt30"></div>
+        <div class="statsRow">
+            <div class="wrapper">
+                <div class="horControlB">
+                    <ul>
+                        <li><a  id='addButton' href="javascript:void(0);"><img alt="" src="<?php echo $this->baseUrl();?>/images/icons/control/16/plus.png">
+                        <span>Ajouter Question</span></a></li>
+                        <li><a  id='GO' href="javascript:void(0);"><img alt="" src="<?php echo $this->baseUrl();?>/images/icons/control/16/check.png">
+                        <span>Enregistrer le Test</span></a></li>
+                        <li><a  href="<?php echo $this->url(array('action'=>'index')); ?>"><img alt="" src="<?php echo $this->baseUrl();?>/images/icons/control/16/refresh.png">
+                        <span>Retour</span></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="line"></div>
+    </fieldset>
+</form>
+<script type="text/javascript" >
+    function getGoodAnwerOption(id)
+    {
+        var choice1 = $('#choice1_'+id).val();
+        var choice2 = $('#choice2_'+id).val();
+        var choice3 = $('#choice3_'+id).val();
+        var choice4 = $('#choice4_'+id).val();
+        var select =' <div class="formRight searchDrop" >'+
+                        '<select name="good_answer_'+id+'" class="select" tabindex="2">'+
+                            '<option value="">Choisir la bonne réponse</option> '+
+                            '<option value="'+choice1+'">'+choice1+'</option> '+
+                            '<option value="'+choice2+'">'+choice2+'</option> '+
+                            '<option value="'+choice3+'">'+choice3+'</option> '+
+                            '<option value="'+choice4+'">'+choice4+'</option> '+
+                       '</select></div>';  
+       $('#good-answer_'+id).html(select);
+    }
+    
+    function removeQuestion(id)
+    {
+        $('#add_'+id).remove();
+    }
+    
+    $(document).ready(function(){
+ 
+    var counter = 2;
+    var form = $('#validate');
+    $("#addButton").click(function () {
+ 
+	if(counter>40){
+            alert("En maximum 40 questions par test");
+            return false;
+	}   
+            var content = '<div class="widget" id="add_'+counter+'">'+
+              '<div class="title"><img src="<?php echo $this->baseUrl();?>/images/icons/dark/create.png" alt="" class="titleIcon" /><h6>Ajouter Question N '+counter+'</h6><h6 style="float: right;"><a href="javascript:void(0);" onclick="removeQuestion('+counter+')" ><img alt="" src="<?php echo $this->baseUrl();?>/images/icons/control/16/del.png" /></a></h6></div>'+
+            '<div class="formRow dnone">'+
+                '<label>Question '+counter+' :</label>'+
+                '<div class="formRight"><textarea id="editor_'+counter+'" name="editor_'+counter+'" rows="" cols=""></textarea></div>'+ 
+                '<div class="clear"></div>'+
+            '</div>'+
+            
+           ' <div class="formRow dnone">'+
+                '<label>Choices 1:<BR><BR><BR>Choices 2:<BR><BR><BR>Choices 3:<BR><BR><BR>Choices 4:</label>'+
+               ' <div class="formRight mt12">'+
+                  '  <span class="oneOne"><input onchange = "javascript: getGoodAnwerOption('+counter+');" name="choice1_'+counter+'" id="choice1_'+counter+'" type="text" value="" /></span><BR><BR>'+
+                   ' <span class="oneOne"><input onchange = "javascript: getGoodAnwerOption('+counter+');" name="choice2_'+counter+'" id="choice2_'+counter+'" type="text" value="" /></span><BR><BR>'+
+                  '  <span class="oneOne"><input onchange = "javascript: getGoodAnwerOption('+counter+');" name="choice3_'+counter+'" id="choice3_'+counter+'" type="text" value="" /></span><BR><BR>'+
+                  '  <span class="oneOne"><input onchange = "javascript:getGoodAnwerOption('+counter+');" name="choice4_'+counter+'" id="choice4_'+counter+'" type="text" value="" /></span>'+
+               ' </div>'+
+             '   <div class="clear"></div>'+
+           ' </div>'+
+           ' <div class="formRow">'+
+              '  <label>Good Answer :</label>'+
+                '<div id="good-answer_'+counter+'"></div>'+
+                '<input type="hidden" name="Hide['+counter+']" />'+
+                '<div class="clear"></div>'+
+           ' </div>'+
+       ' </div>';
+       $('.question').append(content);
+	counter++;
+     });
+     
+     $("#GO").click(function () {
+         form.submit();
+    });  
+  });
+
+</script>

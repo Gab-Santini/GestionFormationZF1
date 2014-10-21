@@ -1,0 +1,31 @@
+<?php foreach($this->detailEmp as $data) { ?>
+<div class="widget">
+    <div class="title">
+        <img class="titleIcon" alt="" src="<?php echo $this->baseUrl();?>/images/icons/dark/preview.png">
+        <h6><?php echo $data['first_name'].' '.$data['last_name'] ?></h6>
+    </div>
+    <div class="body textL">
+        <div class="list roundtipB">
+              <?php if(!empty($data['project_name'])): ?>
+            <h6 class="pt20">Détail project</h6>
+            <ul>
+                <li><strong class="red">Nom de projet:</strong> <?php echo $data['project_name']; ?></li>
+                <li><strong class="red">CP         :</strong> <?php echo $data['cp']; ?></li>
+                <li><strong class="red">Déscription :</strong> <?php //echo $data['project_desc']; ?></li>
+            </ul>
+             <?php endif; ?>
+            <?php if(!empty($data['name_formation'])): ?>
+            <h6 class="pt20">Détail Formation</h6>
+            <ul>
+                <li><strong class="red">Formation  			:</strong> <?php echo $data['name_formation']; ?></li>
+                <li><strong class="red">Date debut      	:</strong> <?php echo $data['date_start']; ?></li>
+                <li><strong class="red">Date fin        	:</strong> <?php echo $data['date_end']; ?></li>
+                <li><strong class="red">Durée de formation 	:</strong> <?php echo $data['duration']; ?> days</li>
+                <li><strong class="red">Résponsable     	:</strong> <?php echo $data['responsable']; ?></li>
+                <li><strong class="red">Déscription     	:</strong> <?php echo $data['description']; ?></li>
+            </ul>
+            <?php endif; ?>
+        </div>
+    </div>
+</div>
+<?php } ?>

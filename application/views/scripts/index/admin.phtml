@@ -1,0 +1,83 @@
+<div class="widget">
+    <div class="title"><img src="<?php echo $this->baseUrl(); ?>/images/icons/dark/list.png" alt="" class="titleIcon" /><h6>Listes des Employés </h6></div>                          
+    <table cellpadding="0" cellspacing="0" border="0" class="display dTable">
+        <thead>
+            <tr>
+                <th>Employé</th>
+                <th style="background:#A9D8F2">Projet</th>
+                <th style="background:#A9D8F2">CP</th>
+                <th style="background:#B3F2A9">Formation</th>
+                <th style="background:#B3F2A9">Responsable</th>
+                <th>Date debut</th>
+                <th>Date fin</th>
+                <th>Statut Formation</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php $i=0; foreach($this->AllEmployees as $element ){ ?>
+            <tr <?php if ($i % 2 === 0) { echo 'class="gradeA"';} ?>>
+                <td align="center"><?php echo $element['first_name']." ".$element['last_name']; ?></td>
+                <td style="background:#A9D8F2" align="center"><?php   if (isset($element['project_name'])) {
+                                echo $element['project_name'];              
+                            }else { 
+                                echo '-';
+                            } ?>
+                </td>
+                <td style="background:#A9D8F2" align="center"><?php   if (isset($element['project_name'])) {
+                                echo $element['cp'];              
+                            }else { 
+                                echo '-';
+                            } ?>
+                </td>
+                <td style="background:#B3F2A9" align="center"><?php   if (isset($element['name_formation'])) {
+                                echo $element['name_formation'];              
+                            }else { 
+                                echo '-';
+                            } ?>
+                </td>
+                <td style="background:#B3F2A9" align="center"><?php   if (isset($element['name_formation'])) {
+                                echo $element['responsable'];              
+                            }else { 
+                                echo '-';
+                            } ?>
+                </td>
+                <td align="center"><?php   if (isset($element['name_formation']) && $element['date_start'] != '30 November 1999') {
+                                echo $element['date_start'];     
+                            }else { 
+                                echo '-';
+                            } ?>
+                </td>
+                <td align="center"><?php   if (isset($element['name_formation']) && $element['date_end'] != '30 November 1999') {
+                                echo $element['date_end'];     
+                            }else { 
+                                echo '-';
+                            } ?>
+                </td>
+                <td align="center"><?php   if (isset($element['name_formation'])) {?>
+                                <div class="horControlB">
+                                    <?php if($element['status']== 1){ ?>
+                                    <a class="button redB" style="margin: 5px;" title="" href="#"><img class="icon" alt="" src="<?php echo $this->baseUrl();?>/images/icons/light/transfer.png"><span>Assignée</span></a>
+                                    <?php }elseif($element['status']== 2){ ?>  
+                                    <a class="button brownB" style="margin: 5px;" title="" href="#"><img class="icon" alt="" src="<?php echo $this->baseUrl();?>/images/icons/light/cog.png"><span>En cours</span></a>
+                                    <?php } 
+                                    else{ ?>  
+                                    <a class="button greenB" style="margin: 5px;" title="" href="#"><img class="icon" alt="" src="<?php echo $this->baseUrl();?>/images/icons/light/check.png"><span>Terminée</span></a>
+                                    <?php }  ?>
+                                </div>
+                            <?php }else { ?>
+                                <div class="horControlB">
+                                    <ul><li><a href='javascript:void(0)'><img alt="" src="<?php echo $this->baseUrl();?>/images/icons/control/16/busy.png"><span>Aucune formation</span></a></li></ul> 
+                                </div>
+                        <?php } ?>
+                </td>
+                <td><div class="horControlB"><ul><li><a href="<?php echo $this->url(array('controller'=>'index',
+                'action'=>'details', 'id'=>$element['id_employee']));?>?iframe=true&width=700&height=400" title="" rel="lightbox">
+                        <img alt="" src="<?php echo $this->baseUrl();?>/images/icons/control/16/zoom.png"><span>Détails</span>
+                    </a></li></ul></div>
+               </td>
+            </tr>
+            <?php } ?>
+        </tbody>
+    </table>  
+</div>

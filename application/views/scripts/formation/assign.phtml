@@ -1,0 +1,64 @@
+<?php  
+    $this->title = "Modifier une formation";
+    $this->headTitle($this->title); ?>
+ <?php if($this->msg) {?> 
+	<div class="nNote nSuccess hideit">
+		<p>
+			<strong>SUCCEE: </strong>
+			<?php echo $this->msg; ?>
+		</p>
+	</div>
+<?php } ?>
+<form id='validate' action="<?php echo $this->escape($this->form->getAction()); ?>"
+      method="<?php echo $this->escape($this->form->getMethod()); ?>" >   
+<div class="widget">
+    <div class="title">
+        <img class="titleIcon" alt="" src="<?php echo $this->baseUrl();?>/images/icons/dark/pencil.png">
+        <h6>Affectation</h6>
+    </div>  
+    <div class="formRow">
+       <label>Formation:</label>
+       <div class="formRight">
+           <?php echo $this->form->selFormation ?>                 
+       </div>             
+       <div class="clear"></div>
+    </div>
+    <div class="formRow">
+       <label>Responsable:</label>
+       <div class="formRight">
+           <?php echo $this->form->selResponsable ?>                 
+       </div>             
+       <div class="clear"></div>
+    </div>
+
+ <div class="formRow">
+ 	<label>Choisir employées :</label>
+ 	<div class="formRight">
+       	<div class="leftPart">
+          <?php echo $this->form->multiSelEmployee ?>             
+    	</div>
+     	<div class="dualControl">
+      		<?php echo $this->form->to2; ?>
+      		<?php echo $this->form->to1; ?>
+     	</div>
+     	<div class="rightPart">
+          	<?php echo $this->form->multiSelEmployeeSelected ?>
+     	</div>             
+    </div>             
+    <div class="clear"></div>	
+ </div>
+ 	<div class="line mt30"></div>
+    <div class="statsRow">
+       <div class="wrapper">
+          <div class="horControlB">
+             <ul>
+              	<li><a  id='addButton' onclick="$('#validate').submit();" href="javascript:void(0);"><img alt="" src="<?php echo $this->baseUrl();?>/images/icons/control/16/milestone.png">
+                   <span>Affecter formation</span></a>
+                </li>
+              </ul>
+          </div>
+       </div>
+     </div>
+     <div class="line"></div>
+</div>
+</form>

@@ -1,0 +1,47 @@
+--Naturel join
+select department_id, department_name,city,country_id from departments natural join locations;
+--USING clause
+select first_name ,last_name,department_id,department_name from employees join departments using(department_id);
+--USING table multiple
+select first_name ,last_name,department_id,department_name, l.city from employees e join departments d using(department_id)
+join locations l using(location_id);
+--ON clause
+select first_name ,last_name,D.department_id,department_name from employees E join departments D ON(E.department_id=D.department_id);
+--ON clause table multiple
+select first_name ,last_name,d.department_id,department_name,l.city from employees e join departments d ON(E.department_id=D.department_id)
+join locations l on(d.location_id=l.location_id) ;
+--LEFT outer join
+select first_name ,last_name,D.department_id,department_name from employees E left outer join departments D ON(E.department_id=D.department_id);
+--RIGTH outer join
+select first_name ,last_name,D.department_id,department_name from employees E right outer join departments D ON(E.department_id=D.department_id);
+--FULL outer join
+select first_name ,last_name,D.department_id,department_name from employees E full outer join departments D ON(E.department_id=D.department_id);
+-- CROISS join
+select first_name ,last_name,D.department_id,department_name from employees E cross join departments D;
+-----------------------------------------------------------------------------------------------------------------------
+----------------------------------- UNION UNION ALL INTRSERCT MINUS----------------------------------------------------
+--UNION
+select employee_id from employees union select employee_id from job_history;
+--UNION ALL
+select employee_id from employees union all select employee_id from job_history;
+--INERTSECT
+select employee_id from employees intersect select employee_id from job_history;
+--MINUS 
+select employee_id from employees minus select employee_id from job_history;
+-------------------------------------------------------------------------------------------------------------------------
+----------------------------------CREATION D'AUTRE OBJETS---------------------------------------------------------------
+--VUE :est une table virtuelle 
+create view v_employees as select department_id,last_name from employees;
+select * from v_employees;
+drop view v_employees;
+--RESTRICTION :jointure, disctinct, groupe by,union , union all, minus, intersect
+   insert,update,delete;
+--with chek option: controle de la mise a jour
+create view v_employees as select department_id,last_name from employees with check option;
+--SEQUENCE : definir une suite des nombres entiers
+create sequence seq1;
+select seq1.nextval from dual;
+select seq1.currval from dual;
+alter sequence seq1 increment by 7;
+create  sequence seq2 increment by 3 start with 99 maxvalue 300 minvalue 99 CYCLE NOCACHE ORDER;
+

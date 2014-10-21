@@ -1,0 +1,66 @@
+﻿
+<!-- Modal note -->
+<?php echo $this->render('user/modal-note.phtml') ?>
+<!-- Fin modal note -->
+<!-- Modal nouvelle formation -->
+<?php echo $this->render('user/modal-formation.phtml'); ?>
+<!-- Fin modal nouvelle formation -->
+<div id="demo"></div>
+<table id="example" class="display" cellspacing="0" width="100%">
+    <thead>
+        <tr>
+            <th>Formation</th>
+            <th>Statut</th>
+            <th>Date debut</th>
+            <th>Date fin</th>
+            <th>Test</th>
+            <th>Nbre d'essais</th>
+            <th>Note</th>
+            <th>Contenu</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        <?php
+        $statut = true;
+        foreach ($this->formations as $formation) {
+            ?>
+            <tr>
+                <td><?php echo $formation['formation']; ?></td>
+                <td id="for_<?php echo $formation['emf_id']; ?>"><?php
+                    switch ($formation['statut']) {
+                        case 1;
+                            echo "<a href='javascript:void(0);' onclick=accepterFormation('" . $formation['emf_id'] . "','" . $formation['test_id'] . "')>accepter</a>";
+                            $statut = false;
+                            break;
+                        case 2;
+                            echo "en cours";
+                            $statut = true;
+                            break;
+                        case 3;
+                            echo "completée";
+                            $statut = true;
+                            break;
+                    }
+                    ?></td>
+                <td><?php echo $formation['date_debut']; ?></td>
+                <td><?php echo $formation['date_fin']; ?></td>
+                <td id="<?php echo $formation['test_id']; ?>">
+                    <?php if ($statut) { ?>
+                        <a href="<?php
+                           echo $this->url(array('controller' => 'user',
+                               'action' => 'tests', 'id' => $formation['test_id']));
+                           ?>"><?php echo "passer le test"; ?> </a>
+                    <?php } else { ?>***************<?php } ?></td>
+                <td>10</td>
+                <td><a href="javascript:void(0);" onclick="getNotes('<?php echo $formation['formations_for_id']; ?>', '<?php echo $formation['employees_emp_id']; ?>')" ><span class="glyphicon glyphicon-list-alt"></span></a>
+                </td>
+                <td><a href="<?php echo $this->url(array('controller' => 'user',
+        'action' => 'download', 'file' => $formation['contenu']));
+    ?>"><span class="glyphicon glyphicon-zoom-in"></span></a></td>
+            </tr>
+<?php } ?>
+
+    </tbody>
+</table>

@@ -1,0 +1,23 @@
+<div class="starting_test">
+    <div class="file_ariane">
+        <ul>
+            <li>
+                <a href="/user">Accueil</a>
+            </li>  
+            <li>
+                <img src="<?php echo $this->baseUrl('/images/rightArrow.png'); ?>">
+            </li>
+            <li>
+                <a href="<?php echo $this->url(array('controller' => 'user',
+            'action' => 'tests'));
+            ?>">Passer le test</a>
+            </li> 
+             <li>
+                <img src="<?php echo $this->baseUrl('/images/rightArrow.png'); ?>">
+            </li>
+            <li> Resultat</li>
+        </ul>
+    </div>
+    <div class="note">Vous avez eu </div><div class="note_img"><?php echo $this->note; ?></div>
+
+</div>
